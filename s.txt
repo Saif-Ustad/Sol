@@ -1,0 +1,1667 @@
+Problem 1
+
+import java.util.Random;
+
+public class P1 {
+
+    // Quicksort implementation
+    public static void quicksort(int[] arr, int low, int high) {
+        if (low < high) {
+            int partitionIndex = partition(arr, low, high);
+
+            quicksort(arr, low, partitionIndex - 1);
+            quicksort(arr, partitionIndex + 1, high);
+        }
+    }
+
+    public static int partition(int[] arr, int low, int high) {
+        int pivot = arr[low];
+        int i = low + 1; // Start from the element next to the pivot
+
+        for (int j = low + 1; j <= high; j++) {
+            if (arr[j] < pivot) {
+                swap(arr, i, j);
+                i++;
+            }
+        }
+
+        // Swap the pivot to its correct position
+        swap(arr, low, i - 1);
+
+        return i - 1;
+    }
+    
+
+    // Mergesort implementation
+    public static void mergesort(int[] arr, int low, int high) {
+        if (low < high) {
+            int mid = (low + high) / 2;
+
+            mergesort(arr, low, mid);
+            mergesort(arr, mid + 1, high);
+
+            merge(arr, low, mid, high);
+        }
+    }
+
+    private static void merge(int[] arr, int low, int mid, int high) {
+        int n1 = mid - low + 1;
+        int n2 = high - mid;
+
+        int[] left = new int[n1];
+        int[] right = new int[n2];
+
+        for (int i = 0; i < n1; ++i)
+            left[i] = arr[low + i];
+        for (int j = 0; j < n2; ++j)
+            right[j] = arr[mid + 1 + j];
+
+        int i = 0, j = 0;
+
+        int k = low;
+        while (i < n1 && j < n2) {
+            if (left[i] <= right[j]) {
+                arr[k] = left[i];
+                i++;
+            } else {
+                arr[k] = right[j];
+                j++;
+            }
+            k++;
+        }
+
+        while (i < n1) {
+            arr[k] = left[i];
+            i++;
+            k++;
+        }
+
+        while (j < n2) {
+            arr[k] = right[j];
+            j++;
+            k++;
+        }
+    }
+
+    private static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    public static void main(String[] args) {
+        int n = 5000; // Number of values
+
+        // Generate random data
+        int[] data = new int[n];
+        Random random = new Random();
+        for (int i = 0; i < n; i++) {
+            data[i] = random.nextInt(1000); // Adjust the range as needed
+        }
+
+        // Measure time for Quicksort
+        long startTime = System.nanoTime();
+        quicksort(data.clone(), 0, n - 1);
+        long endTime = System.nanoTime();
+        long quicksortTime = endTime - startTime;
+
+        // Measure time for Mergesort
+        startTime = System.nanoTime();
+        mergesort(data.clone(), 0, n - 1);
+        endTime = System.nanoTime();
+        long mergesortTime = endTime - startTime;
+
+        // Display times
+        System.out.println("Time taken for Quicksort: " + quicksortTime + " nanoseconds");
+        System.out.println("Time taken for Mergesort: " + mergesortTime + " nanoseconds");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Problem 2
+
+
+import java.util.Random;
+
+public class P2 {
+
+    // Quicksort implementation
+    public static void quicksort(int[] arr, int low, int high) {
+        if (low < high) {
+            int partitionIndex = partition(arr, low, high);
+
+            quicksort(arr, low, partitionIndex - 1);
+            quicksort(arr, partitionIndex + 1, high);
+        }
+    }
+
+    public static int partition(int[] arr, int low, int high) {
+        int pivot = arr[low];
+        int i = low + 1; // Start from the element next to the pivot
+
+        for (int j = low + 1; j <= high; j++) {
+            if (arr[j] < pivot) {
+                swap(arr, i, j);
+                i++;
+            }
+        }
+
+        // Swap the pivot to its correct position
+        swap(arr, low, i - 1);
+
+        return i - 1;
+    }
+    
+
+    // Mergesort implementation
+    public static void mergesort(int[] arr, int low, int high) {
+        if (low < high) {
+            int mid = (low + high) / 2;
+
+            mergesort(arr, low, mid);
+            mergesort(arr, mid + 1, high);
+
+            merge(arr, low, mid, high);
+        }
+    }
+
+    private static void merge(int[] arr, int low, int mid, int high) {
+        int n1 = mid - low + 1;
+        int n2 = high - mid;
+
+        int[] left = new int[n1];
+        int[] right = new int[n2];
+
+        for (int i = 0; i < n1; ++i)
+            left[i] = arr[low + i];
+        for (int j = 0; j < n2; ++j)
+            right[j] = arr[mid + 1 + j];
+
+        int i = 0, j = 0;
+
+        int k = low;
+        while (i < n1 && j < n2) {
+            if (left[i] <= right[j]) {
+                arr[k] = left[i];
+                i++;
+            } else {
+                arr[k] = right[j];
+                j++;
+            }
+            k++;
+        }
+
+        while (i < n1) {
+            arr[k] = left[i];
+            i++;
+            k++;
+        }
+
+        while (j < n2) {
+            arr[k] = right[j];
+            j++;
+            k++;
+        }
+    }
+
+    private static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    public static void main(String[] args) {
+        int n = 5000; // Number of values
+
+        // Generate random data
+        int[] data = new int[n];
+        Random random = new Random();
+        for (int i = 0; i < n; i++) {
+            data[i] = random.nextInt(1000); // Adjust the range as needed
+        }
+
+        // Measure time for Quicksort
+        long startTime = System.nanoTime();
+        quicksort(data.clone(), 0, n - 1);
+        long endTime = System.nanoTime();
+        long quicksortTime = endTime - startTime;
+
+        // Measure time for Mergesort
+        startTime = System.nanoTime();
+        mergesort(data.clone(), 0, n - 1);
+        endTime = System.nanoTime();
+        long mergesortTime = endTime - startTime;
+
+        // Display times
+        System.out.println("Time taken for Quicksort: " + quicksortTime + " nanoseconds");
+        System.out.println("Time taken for Mergesort: " + mergesortTime + " nanoseconds");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Problem 3A
+
+
+public class P3A {
+
+    public static void quickSort(int[] arr, int low, int high) {
+        if (low < high) {
+            int partitionIndex = partition(arr, low, high);
+
+            quickSort(arr, low, partitionIndex - 1);
+            quickSort(arr, partitionIndex + 1, high);
+        }
+    }
+
+    public static int partition(int[] arr, int low, int high) {
+        int pivot = arr[low];
+        int i = low + 1; // Start from the element next to the pivot
+
+        for (int j = low + 1; j <= high; j++) {
+            if (arr[j] < pivot) {
+                swap(arr, i, j);
+                i++;
+            }
+        }
+
+        // Swap the pivot to its correct position
+        swap(arr, low, i - 1);
+
+        return i - 1;
+    }
+
+    private static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    public static void main(String[] args) {
+        int n = 10000; // Number of values
+
+        // Generate best-case scenario (already sorted)
+        int[] bestCaseData = new int[n];
+        for (int i = 0; i < n; i++) {
+            bestCaseData[i] = i;
+        }
+
+        // Generate worst-case scenario (sorted in reverse order)
+        int[] worstCaseData = new int[n];
+        for (int i = 0; i < n; i++) {
+            worstCaseData[i] = n - i;
+        }
+
+        // Measure time for best-case scenario
+        long bestCaseStartTime = System.nanoTime();
+        quickSort(bestCaseData.clone(), 0, n - 1);
+        long bestCaseEndTime = System.nanoTime();
+        long bestCaseTime = bestCaseEndTime - bestCaseStartTime;
+
+        // Measure time for worst-case scenario
+        long worstCaseStartTime = System.nanoTime();
+        quickSort(worstCaseData.clone(), 0, n - 1);
+        long worstCaseEndTime = System.nanoTime();
+        long worstCaseTime = worstCaseEndTime - worstCaseStartTime;
+
+        // Display times
+        System.out.println("Time taken for best-case scenario: " + bestCaseTime + " nanoseconds");
+        System.out.println("Time taken for worst-case scenario: " + worstCaseTime + " nanoseconds");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+problem 3B
+
+
+
+import java.util.Arrays;
+import java.util.Random;
+
+public class P3B {
+
+    public static void main(String[] args) {
+        int[] initialChromosome = {0, 1, 2, 3, 4};  // representing a tour of cities
+        int[] mutatedChromosome = mutateTSPChromosome(initialChromosome);
+
+        System.out.println("Initial Chromosome: " + Arrays.toString(initialChromosome));
+        System.out.println("Mutated Chromosome: " + Arrays.toString(mutatedChromosome));
+    }
+
+    private static int[] mutateTSPChromosome(int[] chromosome) {
+        int[] mutatedChromosome = Arrays.copyOf(chromosome, chromosome.length);
+
+        // Select two random indices for swapping
+        Random random = new Random();
+        int index1 = random.nextInt(chromosome.length);
+        int index2;
+        do {
+            index2 = random.nextInt(chromosome.length);
+        } while (index1 == index2);
+
+        // Perform swap mutation
+        int temp = mutatedChromosome[index1];
+        mutatedChromosome[index1] = mutatedChromosome[index2];
+        mutatedChromosome[index2] = temp;
+
+        return mutatedChromosome;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Problem 3C
+
+
+
+//4. Implement Travelling Salesman problem using backtracking technique.
+
+import java.util.Scanner;
+
+public class P3C {
+
+    private int[][] graph;
+    private int n;
+    private int minCost = Integer.MAX_VALUE;
+
+    public static void main(String[] args) {
+        P3C tsp = new P3C();
+        tsp.run();
+    }
+
+    public void run() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of cities: ");
+        n = scanner.nextInt();
+
+        graph = new int[n][n];
+
+        System.out.println("Enter the distance matrix (enter -1 if there is no direct connection):");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                graph[i][j] = scanner.nextInt();
+            }
+        }
+
+        scanner.close();
+
+        int[] path = new int[n];
+        path[0] = 0;
+
+        long startTime = System.nanoTime();
+
+        tspBranchAndBound(path, 1, 0);
+
+        long endTime = System.nanoTime();
+        long executionTime = endTime - startTime;
+
+        // Print results
+        System.out.println("Optimal TSP tour length: " + minCost);
+        System.out.println("Time Complexity: " + executionTime + " nanoseconds");
+        System.out.println("Space Complexity: O(n) (call stack space)");
+    }
+
+    private void tspBranchAndBound(int[] path, int count, int currentLength) {
+        if (count == n) {
+            int tourLength = currentLength + graph[path[count - 1]][0];
+            minCost = Math.min(minCost, tourLength);
+            return; // Added termination condition
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (!contains(path, i) && graph[path[count - 1]][i] != -1) {
+                path[count] = i;
+                tspBranchAndBound(path, count + 1, currentLength + graph[path[count - 1]][i]);
+                path[count] = -1;
+            }
+        }
+    }
+
+    private boolean contains(int[] arr, int value) {
+        for (int num : arr) {
+            if (num == value) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Problem 5
+
+
+
+public class P5 {
+
+    public static int maxValue(int[] weights, int[] values, int capacity) {
+        int n = weights.length;
+        int[][] dp = new int[n + 1][capacity + 1];
+
+        for (int item = 1; item <= n; item++) {
+            int weight = weights[item - 1];
+            int value = values[item - 1];
+
+            for (int currentCapacity = 1; currentCapacity <= capacity; currentCapacity++) {
+                if (weight <= currentCapacity) {
+                    dp[item][currentCapacity] = Math.max(value + dp[item - 1][currentCapacity - weight], dp[item - 1][currentCapacity]);
+                } else {
+                    dp[item][currentCapacity] = dp[item - 1][currentCapacity];
+                }
+            }
+        }
+
+        return dp[n][capacity];
+    }
+
+    public static void main(String[] args) {
+        int[] weights = {2, 3, 4, 5};
+        int[] values = {3, 4, 5, 6};
+        int capacity = 5;
+
+        int result = maxValue(weights, values, capacity);
+
+        System.out.println("Maximum value that can be obtained: " + result);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+Problem public class P6 {
+
+    private static final int[] QUEEN_SIZES = {4, 5, 6, 7, 8};
+
+    private static int solutions;
+
+    private static boolean isSafe(int[][] board, int row, int col) {
+        // Check upper diagonal on left side
+        for (int i = row, j = col; i >= 0 && j >= 0; i--, j--) {
+            if (board[i][j] == 1) {
+                return false;
+            }
+        }
+
+        // Check upper diagonal on right side
+        for (int i = row, j = col; i >= 0 && j < board.length; i--, j++) {
+            if (board[i][j] == 1) {
+                return false;
+            }
+        }
+
+        // Check column
+        for (int i = 0; i < row; i++) {
+            if (board[i][col] == 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static void solveNQueensUtil(int[][] board, int row) {
+        if (row >= board.length) {
+            solutions++;
+            return; // All queens are placed successfully
+        }
+
+        for (int i = 0; i < board.length; i++) {
+            if (isSafe(board, row, i)) {
+                board[row][i] = 1; // Place this queen in board[row][i]
+                solveNQueensUtil(board, row + 1);
+                board[row][i] = 0; // If placing queen doesn't lead to a solution, backtrack
+            }
+        }
+    }
+
+    public static void solveNQueens(int n) {
+        int[][] board = new int[n][n];
+        solveNQueensUtil(board, 0);
+    }
+
+    public static void main(String[] args) {
+        for (int n : QUEEN_SIZES) {
+            long startTime = System.nanoTime();
+            solutions = 0; // Reset solutions count
+            solveNQueens(n);
+            long endTime = System.nanoTime();
+
+            System.out.println("Number of solutions for " + n + " Queens: " + solutions);
+            System.out.println("Time taken for " + n + " Queens: " + (endTime - startTime) + " nano seconds");
+            System.out.println();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+Problem 7
+
+
+// Java program to solve Traveling Salesman Problem using Branch and Bound.
+import java.util.*;
+
+class P7 {
+
+    static int N = 4;
+
+    static int final_path[] = new int[N + 1];
+    static boolean visited[] = new boolean[N];
+    static int final_res = Integer.MAX_VALUE;
+
+
+    static void copyToFinal(int curr_path[]) {
+        for (int i = 0; i < N; i++)
+            final_path[i] = curr_path[i];
+        final_path[N] = curr_path[0];
+    }
+
+
+    static int firstMin(int adj[][], int i) {
+        int min = Integer.MAX_VALUE;
+        for (int k = 0; k < N; k++)
+            if (adj[i][k] < min && i != k)
+                min = adj[i][k];
+        return min;
+    }
+
+
+    static int secondMin(int adj[][], int i) {
+        int first = Integer.MAX_VALUE, second = Integer.MAX_VALUE;
+        for (int j = 0; j < N; j++) {
+            if (i == j)
+                continue;
+
+            if (adj[i][j] <= first) {
+                second = first;
+                first = adj[i][j];
+            } else if (adj[i][j] <= second &&
+                    adj[i][j] != first)
+                second = adj[i][j];
+        }
+        return second;
+    }
+
+
+    static void TSPRec(int adj[][], int curr_bound, int curr_weight, int level, int curr_path[]) {
+
+        if (level == N) {
+            
+            if (adj[curr_path[level - 1]][curr_path[0]] != 0) {
+                
+                int curr_res = curr_weight + adj[curr_path[level - 1]][curr_path[0]];
+
+                if (curr_res < final_res) {
+                    copyToFinal(curr_path);
+                    final_res = curr_res;
+                }
+            }
+            return;
+        }
+
+        for (int i = 0; i < N; i++) {
+        
+            if (adj[curr_path[level - 1]][i] != 0 && visited[i] == false) {
+                
+                int temp = curr_bound;
+                curr_weight += adj[curr_path[level - 1]][i];
+
+                if (level == 1)
+                    curr_bound -= ((firstMin(adj, curr_path[level - 1]) + firstMin(adj, i)) / 2);
+                else
+                    curr_bound -= ((secondMin(adj, curr_path[level - 1]) + firstMin(adj, i)) / 2);
+
+                if (curr_bound + curr_weight < final_res) {
+                    curr_path[level] = i;
+                    visited[i] = true;
+
+                    TSPRec(adj, curr_bound, curr_weight, level + 1, curr_path);
+                }
+
+              
+                curr_weight -= adj[curr_path[level - 1]][i];
+                curr_bound = temp;
+
+                Arrays.fill(visited, false);
+                for (int j = 0; j <= level - 1; j++)
+                    visited[curr_path[j]] = true;
+            }
+        }
+    }
+
+   
+    static void TSP(int adj[][]) {
+        int curr_path[] = new int[N + 1];
+        int curr_bound = 0;
+        Arrays.fill(curr_path, -1);
+        Arrays.fill(visited, false);
+
+        for (int i = 0; i < N; i++)
+            curr_bound += (firstMin(adj, i) + secondMin(adj, i));
+
+        curr_bound = (curr_bound == 1) ? curr_bound / 2 + 1 : curr_bound / 2;
+
+        visited[0] = true;
+        curr_path[0] = 0;
+
+        TSPRec(adj, curr_bound, 0, 1, curr_path);
+    }
+
+
+    public static void main(String[] args) {
+
+        int adj[][] = { { 0, 10, 15, 20 },
+                { 5, 0, 9, 10 },
+                { 6, 13, 0, 12 },
+                { 8, 8, 9, 0 } };
+
+        TSP(adj);
+
+        System.out.printf("Minimum cost : %d\n", final_res);
+        System.out.printf("Path Taken : ");
+        for (int i = 0; i <= N; i++) {
+            System.out.printf("%d ", final_path[i]);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Problem 11
+
+import java.util.concurrent.Semaphore;
+
+public class P11 {
+
+    private static final int NUM_PHILOSOPHERS = 5;
+    private static final int EATING_LIMIT = 1;
+    private static Semaphore[] forks = new Semaphore[NUM_PHILOSOPHERS];
+    private static int[] eatCount = new int[NUM_PHILOSOPHERS];
+
+    public static void main(String[] args) {
+        for (int i = 0; i < NUM_PHILOSOPHERS; i++) {
+            forks[i] = new Semaphore(1);
+        }
+
+        for (int i = 1; i <= NUM_PHILOSOPHERS; i++) {
+            final int philosopherId = i;
+            new Thread(() -> dine(philosopherId)).start();
+        }
+    }
+
+    private static void dine(int philosopherId) {
+        while (true) {
+            think(philosopherId);
+
+            int leftFork = philosopherId - 1;
+            int rightFork = philosopherId % NUM_PHILOSOPHERS;
+
+            try {
+                forks[leftFork].acquire();
+                forks[rightFork].acquire();
+
+                eat(philosopherId);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                forks[leftFork].release();
+                forks[rightFork].release();
+            }
+        }
+    }
+
+    private static void think(int philosopherId) {
+        System.out.println("Philosopher " + philosopherId + " is thinking");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void eat(int philosopherId) {
+        System.out.println("Philosopher " + philosopherId + " is eating");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        eatCount[philosopherId - 1]++;
+
+        if (eatCount[philosopherId - 1] >= EATING_LIMIT) {
+            System.out.println("Philosopher " + philosopherId + " has finished eating " + EATING_LIMIT + " times.");
+            if (allPhilosophersFinished()) {
+                System.out.println("All philosophers have finished eating. Stopping the program.");
+                System.exit(0);
+            }
+        }
+    }
+
+    private static boolean allPhilosophersFinished() {
+        for (int count : eatCount) {
+            if (count < EATING_LIMIT) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Problem 13
+
+
+//7. Implement multithreaded matrix multiplication.
+
+import java.util.*;
+
+public class P13 {
+
+    static final int MATRIX_SIZE = 4;
+    static final int MAX_THREADS = 8;
+    static int[][] matrixA = new int[MATRIX_SIZE][MATRIX_SIZE];
+    static int[][] matrixB = new int[MATRIX_SIZE][MATRIX_SIZE];
+    static int[][] matrixC = new int[MATRIX_SIZE][MATRIX_SIZE];
+
+    static int currentRow = 0;
+
+    static class Worker implements Runnable {
+
+        int row;
+
+        Worker(int row) {
+            this.row = row;
+        }
+
+        @Override
+        public void run() {
+            for (int col = 0; col < MATRIX_SIZE; col++) {
+                for (int k = 0; k < MATRIX_SIZE; k++) {
+                    matrixC[row][col] += matrixA[row][k] * matrixB[k][col];
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Random random = new Random();
+
+        // Initialize matrices A and B with random values
+        for (int i = 0; i < MATRIX_SIZE; i++) {
+            for (int j = 0; j < MATRIX_SIZE; j++) {
+                matrixA[i][j] = random.nextInt(10);
+                matrixB[i][j] = random.nextInt(10);
+            }
+        }
+
+        // Display matrices A and B
+        System.out.println("Matrix A:");
+        displayMatrix(matrixA);
+
+        System.out.println("Matrix B:");
+        displayMatrix(matrixB);
+
+        long start = System.nanoTime();
+
+        // Create and start worker threads
+        Thread[] threads = new Thread[MAX_THREADS];
+        for (int i = 0; i < MATRIX_SIZE; i++) {
+            threads[i] = new Thread(new Worker(currentRow++));
+            threads[i].start();
+        }
+
+        // Wait for all threads to finish
+        for (int i = 0; i < MATRIX_SIZE; i++) {
+            try {
+                threads[i].join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        long end = System.nanoTime();
+        long executionTime = end - start;
+
+        // Display the result matrix C
+        System.out.println("Matrix Multiplication Result (C):");
+        displayMatrix(matrixC);
+
+        System.out.println("Execution time: " + executionTime + " nanoseconds");
+    }
+
+    // Helper method to display a matrix
+    private static void displayMatrix(int[][] matrix) {
+        for (int i = 0; i < MATRIX_SIZE; i++) {
+            for (int j = 0; j < MATRIX_SIZE; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Assignment 1
+
+
+import java.util.*;
+
+public class A1 {
+
+    public static void quicksort(int[] arr, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition(arr, low, high);
+            quicksort(arr, low, pivotIndex - 1);
+            quicksort(arr, pivotIndex + 1, high);
+
+        }
+    }
+
+    public static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    public static int partition(int[] arr, int low, int high) {
+        int pivot = arr[low];
+        int i = low + 1; // Start from the element next to the pivot
+
+        for (int j = low + 1; j <= high; j++) {
+            if (arr[j] < pivot) {
+                swap(arr, i, j);
+                i++;
+            }
+        }
+
+        // Swap the pivot to its correct position
+        swap(arr, low, i - 1);
+
+        return i - 1;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter no of elements");
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        System.out.println("enter elements");
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        long start = System.nanoTime();
+        quicksort(arr, 0, n - 1);
+        long end = System.nanoTime();
+        long time = end - start;
+
+        long space = arr.length * 4 + 12;
+
+        System.out.println("Time required : " + time + "nano sec");
+        System.out.println("Space required : " + space + "bytes");
+
+        System.out.println("Sorted array is :");
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Assignment 2
+
+// 2. Implement 0/1 knapsack using Dynamic Programming
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class Item {
+    int weight, value;
+
+    public Item(int weight, int value) {
+        this.weight = weight;
+        this.value = value;
+    }
+}
+
+public class A2 {
+
+    public static double knapsackGreedy(Item[] items, int capacity) {
+        // Sort items based on value-to-weight ratio in descending order
+        Arrays.sort(items, Comparator.comparingDouble((Item item) -> (double) item.value / item.weight).reversed());
+
+        int currentWeight = 0;
+        double finalValue = 0.0;
+
+        // Iterate through sorted items and add them to the knapsack greedily
+        for (Item item : items) {
+            if (currentWeight + item.weight <= capacity) {
+                // Add the whole item if it fits into the knapsack
+                currentWeight += item.weight;
+                finalValue += item.value;
+            } else {
+                // Add a fraction of the item to fill the knapsack to its capacity
+                int remainingWeight = capacity - currentWeight;
+                finalValue += (double) item.value * remainingWeight / item.weight;
+                break;
+            }
+        }
+
+        return finalValue;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of items: ");
+        int n = scanner.nextInt();
+
+        Item[] items = new Item[n];
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter weight of item " + (i + 1) + ": ");
+            int weight = scanner.nextInt();
+            System.out.print("Enter value of item " + (i + 1) + ": ");
+            int value = scanner.nextInt();
+            items[i] = new Item(weight, value);
+        }
+
+        System.out.print("Enter the knapsack capacity: ");
+        int capacity = scanner.nextInt();
+
+        double maxValue = knapsackGreedy(items, capacity);
+        System.out.println("Maximum value that can be obtained: " + maxValue);
+
+        scanner.close();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Assignment 3
+
+//3. Implement 8 queens problem using Backtracking
+
+public class A3 {
+
+    private static final int N = 8; // Number of queens
+    private static int solutions = 0;
+
+    private static boolean isSafe(int[][] board, int row, int col) {
+        // Check upper diagonal on left side
+        for (int i = row, j = col; i >= 0 && j >= 0; i--, j--) {
+            if (board[i][j] == 1) {
+                return false;
+            }
+        }
+
+        // Check upper diagonal on right side
+        for (int i = row, j = col; i >= 0 && j < N; i--, j++) {
+            if (board[i][j] == 1) {
+                return false;
+            }
+        }
+
+        // Check column
+        for (int i = 0; i < row; i++) {
+            if (board[i][col] == 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static void printSolution(int[][] board) {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    private static void solveNQueensUtil(int[][] board, int row) {
+        if (row >= N) {
+            solutions++;
+            printSolution(board);
+            return; // All queens are placed successfully
+        }
+
+        for (int i = 0; i < N; i++) {
+            if (isSafe(board, row, i)) {
+                board[row][i] = 1; // Place this queen in board[row][i]
+                solveNQueensUtil(board, row + 1);
+                board[row][i] = 0; // If placing queen doesn't lead to a solution, backtrack
+            }
+        }
+    }
+
+    public static void solveNQueens() {
+        int[][] board = new int[N][N];
+        solveNQueensUtil(board, 0);
+    }
+
+    public static void main(String[] args) {
+        long startTime = System.currentTimeMillis();
+        solveNQueens();
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("Number of solutions: " + solutions);
+        System.out.println("Time taken: " + (endTime - startTime) + " milliseconds");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Assignment 4
+
+
+//4. Implement Travelling Salesman problem using branch and bound technique.
+
+import java.util.Scanner;
+
+public class A4 {
+
+    private int[][] graph;
+    private int n;
+    private int minCost = Integer.MAX_VALUE;
+
+    public static void main(String[] args) {
+        A4 tsp = new A4();
+        tsp.run();
+    }
+
+    public void run() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of cities: ");
+        n = scanner.nextInt();
+
+        graph = new int[n][n];
+
+        System.out.println("Enter the distance matrix (enter -1 if there is no direct connection):");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                graph[i][j] = scanner.nextInt();
+            }
+        }
+
+        scanner.close();
+
+        int[] path = new int[n];
+        path[0] = 0;
+
+        long startTime = System.nanoTime();
+
+        tspBranchAndBound(path, 1, 0);
+
+        long endTime = System.nanoTime();
+        long executionTime = endTime - startTime;
+
+        // Print results
+        System.out.println("Optimal TSP tour length: " + minCost);
+        System.out.println("Time Complexity: " + executionTime + " nanoseconds");
+        System.out.println("Space Complexity: O(n) (call stack space)");
+    }
+
+    private void tspBranchAndBound(int[] path, int count, int currentLength) {
+        if (count == n) {
+            int tourLength = currentLength + graph[path[count - 1]][0];
+            minCost = Math.min(minCost, tourLength);
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (!contains(path, i) && graph[path[count - 1]][i] != -1) {
+                path[count] = i;
+                tspBranchAndBound(path, count + 1, currentLength + graph[path[count - 1]][i]);
+                path[count] = -1;
+            }
+        }
+    }
+
+    private boolean contains(int[] arr, int value) {
+        for (int num : arr) {
+            if (num == value) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Assignment 5
+
+
+//5. Implement Travelling Salesman problem using Genetic Algorithm
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class A5 {
+    private static final int V = 5;
+    private static final String GENES = "ABCDE";
+    private static final int START = 0;
+    private static final int POP_SIZE = 10;
+
+    private static class Individual {
+        String gnome;
+        int fitness;
+    }
+
+    private static int randNum(int start, int end) {
+        int r = end - start;
+        return start + (int) (Math.random() * r);
+    }
+
+    private static boolean repeat(String s, char ch) {
+        return s.contains(String.valueOf(ch));
+    }
+
+    private static String mutatedGene(String gnome) {
+        while (true) {
+            int r = randNum(1, V);
+            int r1 = randNum(1, V);
+            if (r1 != r) {
+                char[] chars = gnome.toCharArray();
+                char temp = chars[r];
+                chars[r] = chars[r1];
+                chars[r1] = temp;
+                return new String(chars);
+            }
+        }
+    }
+
+    private static String createGnome() {
+        StringBuilder gnome = new StringBuilder("0");
+        while (true) {
+            if (gnome.length() == V) {
+                gnome.append(gnome.charAt(0));
+                break;
+            }
+            int temp = randNum(1, V);
+            if (!repeat(gnome.toString(), (char) (temp + 48)))
+                gnome.append((char) (temp + 48));
+        }
+        return gnome.toString();
+    }
+
+    private static int calFitness(String gnome) {
+        int[][] map = {
+                { 0, 2, Integer.MAX_VALUE, 12, 5 },
+                { 2, 0, 4, 8, Integer.MAX_VALUE },
+                { Integer.MAX_VALUE, 4, 0, 3, 3 },
+                { 12, 8, 3, 0, 10 },
+                { 5, Integer.MAX_VALUE, 3, 10, 0 }
+        };
+        int f = 0;
+        for (int i = 0; i < gnome.length() - 1; i++) {
+            if (map[gnome.charAt(i) - 48][gnome.charAt(i + 1) - 48] == Integer.MAX_VALUE)
+                return Integer.MAX_VALUE;
+            f += map[gnome.charAt(i) - 48][gnome.charAt(i + 1) - 48];
+        }
+        return f;
+    }
+
+    private static int cooldown(int temp) {
+        return (90 * temp) / 100;
+    }
+
+    private static boolean lessThan(Individual t1, Individual t2) {
+        return t1.fitness < t2.fitness;
+    }
+
+    private static void tspUtil() {
+        int gen = 1;
+        int genThres = 5;
+        ArrayList<Individual> population = new ArrayList<>();
+        Individual temp;
+        for (int i = 0; i < POP_SIZE; i++) {
+            temp = new Individual();
+            temp.gnome = createGnome();
+            temp.fitness = calFitness(temp.gnome);
+            population.add(temp);
+        }
+        System.out.println("\nInitial population: ");
+        for (int i = 0; i < POP_SIZE; i++)
+            System.out.println(population.get(i).gnome + " " + population.get(i).fitness);
+        boolean found = false;
+        int temperature = 10000;
+        while (temperature > 1000 && gen <= genThres) {
+            Collections.sort(population, (t1, t2) -> Integer.compare(t1.fitness, t2.fitness));
+            System.out.println("\nCurrent temp: " + temperature + "\n");
+            ArrayList<Individual> newPopulation = new ArrayList<>();
+            for (int i = 0; i < POP_SIZE; i++) {
+                Individual p1 = population.get(i);
+                while (true) {
+                    String newG = mutatedGene(p1.gnome);
+                    Individual newGnome = new Individual();
+                    newGnome.gnome = newG;
+                    newGnome.fitness = calFitness(newGnome.gnome);
+                    if (newGnome.fitness <= population.get(i).fitness) {
+                        newPopulation.add(newGnome);
+                        break;
+                    } else {
+                        float prob = (float) Math.pow(2.7,
+                                -1 * ((float) (newGnome.fitness
+                                        - population.get(i).fitness)
+                                        / temperature));
+                        if (prob > 0.5) {
+                            newPopulation.add(newGnome);
+                            break;
+                        }
+                    }
+                }
+            }
+            temperature = cooldown(temperature);
+            population = newPopulation;
+            System.out.println("Generation " + gen + " \n");
+            System.out.println("GNOME FITNESS VALUE\n");
+            for (int i = 0; i < POP_SIZE; i++)
+                System.out.println(population.get(i).gnome + " " + population.get(i).fitness);
+            gen++;
+        }
+    }
+
+    public static void main(String[] args) {
+        tspUtil();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Assignment  6
+
+//6. Implement Concurrent Dining Philosopher Problem.
+
+import java.util.concurrent.locks.*;
+
+
+class Philosopher extends Thread {
+
+    private Lock leftFork, rightFork;
+
+    public Philosopher(String name, Lock leftFork, Lock rightFork) {
+        super(name);
+        this.leftFork = leftFork;
+        this.rightFork = rightFork;
+    }
+
+    public void run() {
+        long startTime = System.currentTimeMillis();
+
+        while (System.currentTimeMillis() - startTime < 20000) {
+            leftFork.lock();
+            System.out.println(getName() + " picked up left fork");
+
+            rightFork.lock();
+            System.out.println(getName() + " picked up right fork");
+
+            System.out.println(getName() + " is eating");
+
+            leftFork.unlock();
+            System.out.println(getName() + " put down left fork");
+
+            rightFork.unlock();
+            System.out.println(getName() + " put down right fork");
+
+            System.out.println(getName() + " is thinking");
+        }
+    }
+}
+
+public class A6 {
+
+    public static void main(String[] args) {
+        int numPhilosophers = 5;
+        Lock[] forks = new Lock[numPhilosophers];
+
+        for (int i = 0; i < numPhilosophers; i++) {
+            forks[i] = new ReentrantLock();
+        }
+
+        for (int i = 0; i < numPhilosophers; i++) {
+            Philosopher philosopher = new Philosopher("Philosopher " + (i + 1), forks[i],
+                    forks[(i + 1) % numPhilosophers]);
+            philosopher.start();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Assignment 7
+
+
+
+//7. Implement multithreaded matrix multiplication.
+
+import java.util.*;
+
+public class A7 {
+
+    static final int MATRIX_SIZE = 4;
+    static final int MAX_THREADS = 8;
+    static int[][] matrixA = new int[MATRIX_SIZE][MATRIX_SIZE];
+    static int[][] matrixB = new int[MATRIX_SIZE][MATRIX_SIZE];
+    static int[][] matrixC = new int[MATRIX_SIZE][MATRIX_SIZE];
+
+    static int currentRow = 0;
+
+    static class Worker implements Runnable {
+
+        int row;
+
+        Worker(int row) {
+            this.row = row;
+        }
+
+        @Override
+        public void run() {
+            for (int col = 0; col < MATRIX_SIZE; col++) {
+                for (int k = 0; k < MATRIX_SIZE; k++) {
+                    matrixC[row][col] += matrixA[row][k] * matrixB[k][col];
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Random random = new Random();
+
+        // Initialize matrices A and B with random values
+        for (int i = 0; i < MATRIX_SIZE; i++) {
+            for (int j = 0; j < MATRIX_SIZE; j++) {
+                matrixA[i][j] = random.nextInt(10);
+                matrixB[i][j] = random.nextInt(10);
+            }
+        }
+
+        // Display matrices A and B
+        System.out.println("Matrix A:");
+        displayMatrix(matrixA);
+
+        System.out.println("Matrix B:");
+        displayMatrix(matrixB);
+
+        long start = System.nanoTime();
+
+        // Create and start worker threads
+        Thread[] threads = new Thread[MAX_THREADS];
+        for (int i = 0; i < MATRIX_SIZE; i++) {
+            threads[i] = new Thread(new Worker(currentRow++));
+            threads[i].start();
+        }
+
+        // Wait for all threads to finish
+        for (int i = 0; i < MATRIX_SIZE; i++) {
+            try {
+                threads[i].join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        long end = System.nanoTime();
+        long executionTime = end - start;
+
+        // Display the result matrix C
+        System.out.println("Matrix Multiplication Result (C):");
+        displayMatrix(matrixC);
+
+        System.out.println("Execution time: " + executionTime + " nanoseconds");
+    }
+
+    // Helper method to display a matrix
+    private static void displayMatrix(int[][] matrix) {
+        for (int i = 0; i < MATRIX_SIZE; i++) {
+            for (int j = 0; j < MATRIX_SIZE; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+
+
+
+
+
